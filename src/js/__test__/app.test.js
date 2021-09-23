@@ -1,9 +1,5 @@
 import Team from '../app';
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 class Character {
   constructor(name, age, role) {
     this.name = name;
@@ -20,14 +16,12 @@ test('adding to the team - unit', () => {
   expect(result).toEqual(expected);
 });
 
-// test('adding without repeating - unit', () => {
-//   const persons = new Team();
-//   const person1 = new Character('Anri', 27, 'inventor');
-//   persons.add(person1);
-//   //const result = persons.add(person1);
-//   //const expected = Error('Персонаж уже есть в команде!');
-//   expect(persons.add(person1)).toBe('Персонаж уже есть в команде!');
-// });
+test('adding without repeating - unit', () => {
+  const persons = new Team();
+  const person1 = new Character('Anri', 27, 'inventor');
+  persons.add(person1);
+  expect(() => { persons.add(person1); }).toThrowError(new Error('Персонаж уже есть в команде!'));
+});
 
 test('multiple addition', () => {
   const persons = new Team();
